@@ -1,0 +1,11 @@
+management.endpoints.web.exposure.include: '*'
+management.endpoint.health.show-details: always
+
+resilience4j.circuitbreaker:
+  instances:
+    hello-world:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 7
+      ringBufferSizeInHalfOpenState: 5
+      waitDurationInOpenState: 30s
+      failureRateThreshold: 60
