@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class HelloWorldResilience {
+public class HelloWorldGateway {
 
     private final RestTemplate restTemplate;
 

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class HelloWorldService {
 
-    private final HelloWorldResilience helloWorldResilience;
+    private final HelloWorldGateway helloWorldGateway;
 
     public String getHelloWorld() {
-        return helloWorldResilience.getHelloWorld();
+        return helloWorldGateway.getHelloWorld();
     }
 }
