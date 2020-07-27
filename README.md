@@ -51,7 +51,7 @@ Now if you hit the `/hello-world` GET service in Swagger after stopping the dock
 <img width="600" alt="Screenshot 2020-07-28 at 00 05 12" src="https://user-images.githubusercontent.com/6831336/88596726-12456200-d066-11ea-8d1a-08b6f053f829.png">
 
 ### 7- Hit the /hello-world more than 6 times
-If you hit the `/hello-world` service more than 6 times then Circuit Breaker will be open and further service hitting will be blocked for next `30 seconds`. One Sample logs is shown below
+If you hit the `/hello-world` service more than 7 times then Circuit Breaker will be open and further service hitting will be blocked for next `30 seconds`. One Sample logs is shown below
 
 ```
 2020-07-28 00:07:26.329 ERROR 77427 --- [nio-8080-exec-7] c.s.r.service.HelloWorldGateway          : Inside fallbackForGetSeller, cause - org.springframework.web.client.ResourceAccessException: I/O error on GET request for "http://localhost:5050/world": Connection refused (Connection refused); nested exception is java.net.ConnectException: Connection refused (Connection refused)
@@ -109,9 +109,9 @@ resilience4j.circuitbreaker:
   instances:
     hello-world:
       registerHealthIndicator: true
-      ringBufferSizeInClosedState: 7
+      ringBufferSizeInClosedState: 7 # after 7 hits circuit will be opened
       ringBufferSizeInHalfOpenState: 5
-      waitDurationInOpenState: 30s
+      waitDurationInOpenState: 30s # 30 seconds is the lockin period once the circuit is open
       failureRateThreshold: 60
       
 ```
