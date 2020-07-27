@@ -1,0 +1,6 @@
+version: '2.1'
+services:
+  hello-world-rest:
+    image: vad1mo/hello-world-rest
+    ports:
+      - '5050:5050'
