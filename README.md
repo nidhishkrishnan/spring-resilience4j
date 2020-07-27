@@ -33,6 +33,8 @@ http://localhost:8080/swagger-ui.html
 
 You can see the swagger ui like as shown below
 
+<img width="600" alt="Screenshot 2020-07-27 at 23 42 03" src="https://user-images.githubusercontent.com/6831336/88595237-e5438000-d062-11ea-950c-02b09231c762.png">
+
 ## License
 
 See [LICENSE](LICENSE) file.
