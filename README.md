@@ -35,6 +35,63 @@ You can see the swagger ui like as shown below
 
 <img width="600" alt="Screenshot 2020-07-27 at 23 42 03" src="https://user-images.githubusercontent.com/6831336/88595237-e5438000-d062-11ea-950c-02b09231c762.png">
 
+
+# How to use Resilience4j in Spring Boot Application
+
+## Define @CircuitBreaker for the service call function:
+
+```java
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class HelloWorldGateway {
+
+    private final RestTemplate restTemplate;
+
+    @CircuitBreaker(name = "hello-world", fallbackMethod = "fallbackForHelloWorld")
+    public String getHelloWorld() {
+        log.info("calling getHelloWorld()");
+        return restTemplate.getForObject("/world", String.class);
+    }
+
+    public String fallbackForHelloWorld(Throwable t) {
+        log.error("Inside fallbackForGetSeller, cause - {}", t.toString());
+        return "Sorry ... Service not available!!!";
+    }
+}
+
+```
+
+## Define the resilience4j properties for "hello-world" in application.yml
+
+```yaml
+resilience4j.circuitbreaker:
+  instances:
+    hello-world:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 7
+      ringBufferSizeInHalfOpenState: 5
+      waitDurationInOpenState: 30s
+      failureRateThreshold: 60
+      
+```
+
+## HelloWorld Service
+Call the HelloWorld Service (`getHelloWorld`) from the `HelloWorldGateway`
+
+```java
+@Service
+@RequiredArgsConstructor
+public class HelloWorldService {
+
+    private final HelloWorldGateway helloWorldGateway;
+
+    public String getHelloWorld() {
+        return helloWorldGateway.getHelloWorld();
+    }
+}
+```
+
 ## License
 
 See [LICENSE](LICENSE) file.
