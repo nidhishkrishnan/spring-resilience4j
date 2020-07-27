@@ -76,7 +76,7 @@ resilience4j.circuitbreaker:
       
 ```
 
-## HelloWorld Service
+## Call the defined @CircuitBreaker function in HelloWorld Service
 Call the HelloWorld Service (`getHelloWorld`) from the `HelloWorldGateway`
 
 ```java
