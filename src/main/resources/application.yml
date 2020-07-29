@@ -5,7 +5,18 @@ resilience4j.circuitbreaker:
   instances:
     hello-world:
       registerHealthIndicator: true
-      ringBufferSizeInClosedState: 7
-      ringBufferSizeInHalfOpenState: 5
+      ringBufferSizeInClosedState: 6
+      ringBufferSizeInHalfOpenState: 6
       waitDurationInOpenState: 30s
-      failureRateThreshold: 60
+      failureRateThreshold: 100
+
+#if retry calls 2 x 3 times and still could'nt trigger the API, then circuit will OPEN
+resilience4j.retry:
+  instances:
+    retry-service:
+      maxRetryAttempts: 3
+      waitDuration: 1000
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - org.springframework.web.client.ResourceAccessException
+

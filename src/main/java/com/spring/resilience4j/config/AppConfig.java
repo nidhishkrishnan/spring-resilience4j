@@ -10,7 +10,7 @@ import org.springframework.web.util.UriTemplateHandler;
 @Configuration
 public class AppConfig {
 
-    private static final String SERVICE_URL = "http://localhost:5050";
+    private static final String SERVICE_URL = "http://localhost:8080";
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
